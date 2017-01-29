@@ -1,4 +1,5 @@
 # XamarinSwipeListView
+![alt tag](http://cristianoinsola.it/blogcontents/gifSwipe.gif)
 ##Basic Setup
 After cloning, initialize the SwipeListView:
 ```
