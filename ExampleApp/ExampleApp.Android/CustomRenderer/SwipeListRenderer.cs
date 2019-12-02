@@ -44,7 +44,6 @@ namespace XamSwipeList.Droid.CustomRenderer
 					case MotionEventActions.Up:
                         CurrentStatus = Status.Default;
                         touchedElement.CompleteTranslation(currentQuota);
-						(this.Element as XamSwipeListView.XamSwipeListView).AppendTouchedElement(touchedElement);
 						TouchDispatcher.TouchingView = null;
 						TouchDispatcher.StartingBiasX = 0;
 						TouchDispatcher.StartingBiasY = 0;

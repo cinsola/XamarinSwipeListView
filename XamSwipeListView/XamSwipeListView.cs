@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
 
@@ -7,20 +8,35 @@ namespace XamSwipeListView
 {
     public class XamSwipeListView : ListView
     {
-        private List<XamSwipeItemView> TouchedElements { get; set; } = new List<XamSwipeItemView>();
-        public void PreventXamarinBug()
+        public XamSwipeListView()
         {
-            foreach (var elem in TouchedElements)
-            {
-                elem.PristineItem();
-            }
-
-            TouchedElements = new List<XamSwipeItemView>();
+            this.SelectionMode = ListViewSelectionMode.None;
         }
 
-        public void AppendTouchedElement(XamSwipeItemView item)
+        protected override void SetupContent(Cell content, int index)
         {
-            TouchedElements.Add(item);
+            base.SetupContent(content, index);
         }
+
+        public void RemoveElement()
+        {
+
+        }
+
+        //private List<XamSwipeItemView> TouchedElements { get; set; } = new List<XamSwipeItemView>();
+        //public void PreventXamarinBug()
+        //{
+        //    foreach (var elem in TouchedElements)
+        //    {
+        //        elem.PristineItem();
+        //    }
+
+        //    TouchedElements = new List<XamSwipeItemView>();
+        //}
+
+        //public void AppendTouchedElement(XamSwipeItemView item)
+        //{
+        //    TouchedElements.Add(item);
+        //}
     }
 }

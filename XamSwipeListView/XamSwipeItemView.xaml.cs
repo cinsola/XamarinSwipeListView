@@ -190,15 +190,10 @@ namespace XamSwipeListView
         public void PristineItem()
         {
             PerformTranslation(0);
-            mainContent.TranslationX = 0;
-            mainContent.TranslationX = 1;
-            mainContent.TranslationX = 0;
-            SetValue(TranslationXProperty, 0);
+            mainContent.Opacity = 1;
             SwipeCompleted = false;
             IsRightContentVisible = false;
             IsLeftContentVisible = false;
-            HasLeftControl = false;
-            HasRightControl = false;
         }
 
         static XamSwipeItemView()

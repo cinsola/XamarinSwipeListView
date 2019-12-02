@@ -31,9 +31,9 @@
                                 <xam:XamSwipeItemView.SwipeRightContent>
                                     <StackLayout BackgroundColor="Green" Padding="15" Orientation="Horizontal">
                                         <Label Text="Save this item for later" TextColor="White" Margin="0, 0, 15, 0"
-											   VerticalOptions="Center" IsVisible="{Binding LeftVisible, Converter={StaticResource negateConverter}}" />
+											   VerticalOptions="Center" IsVisible="{Binding SavedConfirmed, Converter={StaticResource negateConverter}}" />
                                         <Label Text="Saved" TextColor="White" Margin="0, 0, 15, 0"
-											   VerticalOptions="Center" IsVisible="{Binding LeftVisible}" />
+											   VerticalOptions="Center" IsVisible="{Binding SavedConfirmed}" />
                                         <Button Text="Undo" Clicked="UndoClick" 
 												CommandParameter="{Reference Name=loopedElement}"
 												VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding LeftVisible}" />
