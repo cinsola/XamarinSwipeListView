@@ -20,7 +20,11 @@ namespace XamSwipeListView
         public static readonly BindableProperty SwipeRightContentProperty;
         public static readonly BindableProperty MainContentProperty;
         public static readonly BindableProperty BoundItemProperty;
+
         bool _isRightContentVisible;
+        bool _isLeftContentVisible;
+        bool _hasRightControl;
+        bool _hasLeftControl;
         public bool SwipeCompleted { get; set; }
         public bool IsRightContentVisible
         {
@@ -29,10 +33,51 @@ namespace XamSwipeListView
             {
                 if (value != _isRightContentVisible)
                 {
-                    OnPropertyChanged(nameof(IsRightContentVisible)); _isRightContentVisible = value;
+                    _isRightContentVisible = value;
+                    OnPropertyChanged(nameof(IsRightContentVisible)); 
                 }
             }
         }
+        public bool IsLeftContentVisible
+        {
+            get { return _isLeftContentVisible; }
+            set
+            {
+                if (value != _isLeftContentVisible)
+                {
+                    _isLeftContentVisible = value;
+                    OnPropertyChanged(nameof(IsLeftContentVisible)); 
+                }
+            }
+        }
+
+
+        public bool HasRightControl
+        {
+            get { return _hasRightControl; }
+            set
+            {
+                if (value != _hasRightControl)
+                {
+                    _hasRightControl = value;
+                    OnPropertyChanged(nameof(HasRightControl)); 
+                }
+            }
+        }
+
+        public bool HasLeftControl
+        {
+            get { return _hasLeftControl; }
+            set
+            {
+                if (value != _hasLeftControl)
+                {
+                    _hasLeftControl = value;
+                    OnPropertyChanged(nameof(HasLeftControl)); 
+                }
+            }
+        }
+
         public View MainContent
         {
             get { return (View)GetValue(MainContentProperty); }
@@ -80,16 +125,29 @@ namespace XamSwipeListView
 
         public void PerformTranslation(double quota)
         {
+            HasLeftControl = false;
+            HasRightControl = false;
+
+            if(quota == 0)
+            {
+                IsRightContentVisible = false;
+                IsLeftContentVisible = false;
+            }
+
             if (quota > 0)
             {
                 IsRightContentVisible = true;
+                IsLeftContentVisible = false;
                 if (ChangeOpacity == true) { mainContent.Opacity = 1 - Math.Abs(quota); }
             }
-            else
+
+            if(quota < 0)
             {
                 IsRightContentVisible = false;
+                IsLeftContentVisible = true;
                 if (ChangeOpacity == true) { mainContent.Opacity = 1 - Math.Abs(quota); }
             }
+
             mainContent.TranslationX = quota * this.Width;
         }
 
@@ -101,6 +159,9 @@ namespace XamSwipeListView
                 if (quota > 0)
                 {
                     IsRightContentVisible = true;
+                    IsLeftContentVisible = false;
+                    HasRightControl = true;
+                    HasLeftControl = false;
                     mainContent.TranslateTo(this.Width + 10, 0, SwipeDuration);
                     if (ChangeOpacity == true) { mainContent.FadeTo(0, SwipeDuration); }
                     if (SwipeRightCompleted != null) { SwipeRightCompleted(this, this.BoundItem); }
@@ -108,6 +169,9 @@ namespace XamSwipeListView
                 else
                 {
                     IsRightContentVisible = false;
+                    IsLeftContentVisible = true;
+                    HasRightControl = false;
+                    HasLeftControl = true;
                     mainContent.TranslateTo(-this.Width - 10, 0, SwipeDuration);
                     if (ChangeOpacity == true) { mainContent.FadeTo(0, SwipeDuration); }
                     if (SwipeLeftCompleted != null) { SwipeLeftCompleted(this, this.BoundItem); }
@@ -130,8 +194,11 @@ namespace XamSwipeListView
             mainContent.TranslationX = 1;
             mainContent.TranslationX = 0;
             SetValue(TranslationXProperty, 0);
-            this.SwipeCompleted = false;
-            IsRightContentVisible = true;
+            SwipeCompleted = false;
+            IsRightContentVisible = false;
+            IsLeftContentVisible = false;
+            HasLeftControl = false;
+            HasRightControl = false;
         }
 
         static XamSwipeItemView()
@@ -150,7 +217,6 @@ namespace XamSwipeListView
                 (bindable as XamSwipeItemView).innerLeftContent.BindingContext = newValue;
                 (bindable as XamSwipeItemView).innerRightContent.BindingContext = newValue;
                 bindable.SetValue(BoundItemProperty, newValue);
-
             }
         }
 

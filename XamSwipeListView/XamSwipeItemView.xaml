@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamSwipeListView.XamSwipeItemView"
-			 xmlns:converter="clr-namespace:XamSwipeListView.Converter">
+			 xmlns:converter="clr-namespace:XamSwipeListView.Converter"
+             xmlns:current="clr-namespace:XamSwipeListView">
     <ContentView.Resources>
         <ResourceDictionary>
             <converter:NegateValueConverter x:Key="negateConverter" />
@@ -13,13 +14,16 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ContentView x:Name="rightContent" Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsRightContentVisible}">
+        <current:ControlledContentView x:Name="rightContent" Grid.Row="0" Grid.Column="0" 
+                                       IsVisible="{Binding IsRightContentVisible}" 
+                                       HasControl="{Binding HasRightControl}">
             <ContentView x:Name="innerRightContent" />
-        </ContentView>
-        <ContentView x:Name="leftContent" Grid.Row="0" Grid.Column="0" 
-					 IsVisible="{Binding IsRightContentVisible, Converter={StaticResource negateConverter}}">
+        </current:ControlledContentView>
+        <current:ControlledContentView x:Name="leftContent" Grid.Row="0" Grid.Column="0" 
+                                       HasControl="{Binding HasLeftControl}"
+                                       IsVisible="{Binding IsLeftContentVisible}">
             <ContentView x:Name="innerLeftContent" />
-        </ContentView>
+        </current:ControlledContentView>
         <ContentView x:Name="mainContent" BackgroundColor="White" Grid.Row="0" Grid.Column="0">
             <ContentView x:Name="innerContent" />
         </ContentView>

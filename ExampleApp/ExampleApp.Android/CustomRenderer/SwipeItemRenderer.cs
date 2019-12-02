@@ -26,5 +26,5 @@ namespace XamSwipeList.Droid.CustomRenderer
 
 			return base.DispatchTouchEvent(touch);
 		}
-	}
+    }
 }
