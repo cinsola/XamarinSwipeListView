@@ -17,16 +17,23 @@ namespace ExampleApp
             this.BindingContext = new ProjectViewModel();
         }
 
-        private void RemoveElement(object sender, EventArgs e)
+        private async void RemoveElement(object sender, EventArgs e)
         {
-            var itemView = (sender as Button).CommandParameter as XamSwipeItemView;
-            (this.BindingContext as ProjectViewModel).ListItems.Remove((ItemClass)(itemView.BoundItem));
+            var itemView = (sender as Button).CommandParameter as ItemClass;
+            string tmp = itemView.Name;
+            var hasRemoved = (this.BindingContext as ProjectViewModel).ListItems.Remove(itemView);
+            if(hasRemoved)
+            {
+                await DisplayAlert("Confirm", $"{tmp} removed", "ok");
+            }
         }
 
         private void SwipeRightCompleted(object sender, object e)
         {
             var selectedItem = (ItemClass)e;
             selectedItem.SavedConfirmed = true;
+            TouchDispatcher.TouchingView = null;
+            TouchDispatcher.TouchingView = null;
         }
 
         private void UndoClick(object sender, EventArgs e)
@@ -45,11 +52,11 @@ namespace ExampleApp
             ListItems = new ObservableCollection<ItemClass> {
                 new ItemClass("1Angela", "The .NET fullstack Developer", new DateTime(2016, 6, 2)),
                 new ItemClass("2Bacco", "A front-end developer", new DateTime(2016, 7, 14)),
-                new ItemClass("3Ciro", "Works with games", new DateTime(2016, 8, 1)),
-                new ItemClass("4Dario", "The fucking CFO", new DateTime(2016, 10, 25)),
-                new ItemClass("5Elmno", "Does nothing at all", new DateTime(2017, 1, 9)),
-                new ItemClass("6Francis", "The good girl", new DateTime(2017, 1, 9)),
-                new ItemClass("7Gus", "The CO-Founder", new DateTime(2016, 6, 2)),
+                //new ItemClass("3Ciro", "Works with games", new DateTime(2016, 8, 1)),
+                //new ItemClass("4Dario", "The fucking CFO", new DateTime(2016, 10, 25)),
+                //new ItemClass("5Elmno", "Does nothing at all", new DateTime(2017, 1, 9)),
+                //new ItemClass("6Francis", "The good girl", new DateTime(2017, 1, 9)),
+                //new ItemClass("7Gus", "The CO-Founder", new DateTime(2016, 6, 2)),
                 new ItemClass("8Hope", "Our business-woman", new DateTime(2016, 10, 15))
             };
         }

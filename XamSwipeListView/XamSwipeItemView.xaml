@@ -1,31 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamSwipeListView.XamSwipeItemView"
-			 xmlns:converter="clr-namespace:XamSwipeListView.Converter"
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamSwipeListView.XamSwipeItemView"
              xmlns:current="clr-namespace:XamSwipeListView">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <converter:NegateValueConverter x:Key="negateConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <current:ControlledContentView x:Name="rightContent" Grid.Row="0" Grid.Column="0" 
+    <ViewCell.View>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <current:ControlledContentView x:Name="rightContent" Grid.Row="0" Grid.Column="0" 
                                        IsVisible="{Binding IsRightContentVisible}" 
                                        HasControl="{Binding HasRightControl}">
-            <ContentView x:Name="innerRightContent" />
-        </current:ControlledContentView>
-        <current:ControlledContentView x:Name="leftContent" Grid.Row="0" Grid.Column="0" 
+                <ContentView x:Name="innerRightContent" />
+            </current:ControlledContentView>
+            <current:ControlledContentView x:Name="leftContent" Grid.Row="0" Grid.Column="0" 
                                        HasControl="{Binding HasLeftControl}"
                                        IsVisible="{Binding IsLeftContentVisible}">
-            <ContentView x:Name="innerLeftContent" />
-        </current:ControlledContentView>
-        <ContentView x:Name="mainContent" BackgroundColor="White" Grid.Row="0" Grid.Column="0">
-            <ContentView x:Name="innerContent" />
-        </ContentView>
-    </Grid>
-</ContentView>
+                <ContentView x:Name="innerLeftContent" />
+            </current:ControlledContentView>
+            <ContentView x:Name="mainContent" BackgroundColor="White" Grid.Row="0" Grid.Column="0">
+                <ContentView x:Name="innerContent" />
+            </ContentView>
+        </Grid>
+    </ViewCell.View>
+</ViewCell>

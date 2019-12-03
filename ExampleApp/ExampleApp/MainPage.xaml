@@ -16,41 +16,39 @@
         <xam:XamSwipeListView ItemsSource="{Binding ListItems}" SeparatorVisibility="Default" RowHeight="150" x:Name="swipeListView">
             <xam:XamSwipeListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <xam:XamSwipeItemView BoundItem="{Binding .}" x:Name="loopedElement"
-											   ChangeOpacity="True" SwipeRightCompleted="SwipeRightCompleted">
-                                <xam:XamSwipeItemView.MainContent>
-                                    <StackLayout Padding="15">
-                                        <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
-                                        <Label Text="{Binding Description}" Margin="0, 0, 0, 0" FontSize="Default" />
-                                        <Label Text="{Binding Join, StringFormat='Joined the team: {0:d}'}" />
-                                        <Button Text="Open" HorizontalOptions="Start" />
-                                    </StackLayout>
-                                </xam:XamSwipeItemView.MainContent>
-                                <xam:XamSwipeItemView.SwipeRightContent>
-                                    <StackLayout BackgroundColor="Green" Padding="15" Orientation="Horizontal">
-                                        <Label Text="Save this item for later" TextColor="White" Margin="0, 0, 15, 0"
+                    <xam:XamSwipeItemView  x:Name="loopedElement"
+                                           BoundItem="{Binding}"
+                                           ChangeOpacity="True"
+                                           SwipeRightCompleted="SwipeRightCompleted">
+                        <xam:XamSwipeItemView.MainContent>
+                            <StackLayout Padding="15">
+                                <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
+                                <Label Text="{Binding Description}" Margin="0, 0, 0, 0" FontSize="Default" />
+                                <Label Text="{Binding Join, StringFormat='Joined the team: {0:d}'}" />
+                                <Button Text="Open" HorizontalOptions="Start" />
+                            </StackLayout>
+                        </xam:XamSwipeItemView.MainContent>
+                        <xam:XamSwipeItemView.SwipeRightContent>
+                            <StackLayout BackgroundColor="Green" Padding="15" Orientation="Horizontal">
+                                <Label Text="Save this item for later" TextColor="White" Margin="0, 0, 15, 0"
 											   VerticalOptions="Center" IsVisible="{Binding SavedConfirmed, Converter={StaticResource negateConverter}}" />
-                                        <Label Text="Saved" TextColor="White" Margin="0, 0, 15, 0"
+                                <Label Text="Saved" TextColor="White" Margin="0, 0, 15, 0"
 											   VerticalOptions="Center" IsVisible="{Binding SavedConfirmed}" />
-                                        <Button Text="Undo" Clicked="UndoClick" 
+                                <Button Text="Undo" Clicked="UndoClick" 
 												CommandParameter="{Reference Name=loopedElement}"
 												VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding LeftVisible}" />
-                                    </StackLayout>
-                                </xam:XamSwipeItemView.SwipeRightContent>
-                                <xam:XamSwipeItemView.SwipeLeftContent>
-                                    <ContentView BackgroundColor="Red" Padding="15">
-                                        <Button 
+                            </StackLayout>
+                        </xam:XamSwipeItemView.SwipeRightContent>
+                        <xam:XamSwipeItemView.SwipeLeftContent>
+                            <ContentView BackgroundColor="Red" Padding="15">
+                                <Button 
 											Text="{Binding Name, StringFormat='Remove {0}'}" 
 											VerticalOptions="Center" HorizontalOptions="End"
 											Clicked="RemoveElement" 
-											CommandParameter="{Reference Name=loopedElement}" />
-                                    </ContentView>
-                                </xam:XamSwipeItemView.SwipeLeftContent>
-                            </xam:XamSwipeItemView>
-                        </ViewCell.View>
-                    </ViewCell>
+											CommandParameter="{Binding .}" />
+                            </ContentView>
+                        </xam:XamSwipeItemView.SwipeLeftContent>
+                    </xam:XamSwipeItemView>
                 </DataTemplate>
             </xam:XamSwipeListView.ItemTemplate>
         </xam:XamSwipeListView>
