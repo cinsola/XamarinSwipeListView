@@ -68,7 +68,7 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamSwipeListView\SwipeCollectionView.csproj">
+    <ProjectReference Include="..\SwipeCollectionView\SwipeCollectionView.csproj">
       <Project>{08185bda-2dc7-4d65-81ca-a94180a8ee4a}</Project>
       <Name>SwipeCollectionView</Name>
     </ProjectReference>

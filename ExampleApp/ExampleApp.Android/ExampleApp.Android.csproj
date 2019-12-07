@@ -93,7 +93,7 @@
       <Project>{936de348-b174-4f56-9bc9-97b45ba599e2}</Project>
       <Name>SwipeCollectionView.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\XamSwipeListView\SwipeCollectionView.csproj">
+    <ProjectReference Include="..\..\SwipeCollectionView\SwipeCollectionView.csproj">
       <Project>{08185BDA-2DC7-4D65-81CA-A94180A8EE4A}</Project>
       <Name>SwipeCollectionView</Name>
     </ProjectReference>

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApp.Android", "Examp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleApp", "ExampleApp\ExampleApp\ExampleApp.csproj", "{CBDCA093-5AC5-4512-9884-8A82F4BED4C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwipeCollectionView", "XamSwipeListView\SwipeCollectionView.csproj", "{08185BDA-2DC7-4D65-81CA-A94180A8EE4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwipeCollectionView", "SwipeCollectionView\SwipeCollectionView.csproj", "{08185BDA-2DC7-4D65-81CA-A94180A8EE4A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{6C0B9CCA-95D8-4197-9014-785C69CE1B53}"
 EndProject
