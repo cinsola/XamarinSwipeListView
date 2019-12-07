@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\XamSwipeListView\XamSwipeListView.csproj" />
+    <ProjectReference Include="..\..\XamSwipeListView\SwipeCollectionView.csproj" />
   </ItemGroup>
 </Project>

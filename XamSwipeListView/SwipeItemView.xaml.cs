@@ -4,10 +4,10 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace XamSwipeListView
+namespace SwipeCollectionView
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class XamSwipeItemView : ViewCell, INotifyPropertyChanged
+    public partial class SwipeItemView : StackLayout, INotifyPropertyChanged
     {
         public event EventHandler<object> SwipeLeftCompleted;
         public event EventHandler<object> SwipeRightCompleted;
@@ -115,7 +115,7 @@ namespace XamSwipeListView
                 SetValue(BoundItemProperty, value);
             }
         }
-        public XamSwipeItemView()
+        public SwipeItemView()
         {
             InitializeComponent();
         }
@@ -145,7 +145,7 @@ namespace XamSwipeListView
                 if (ChangeOpacity == true) { mainContent.Opacity = 1 - Math.Abs(quota); }
             }
 
-            mainContent.TranslationX = quota * this.View.Width;
+            mainContent.TranslationX = quota * this.Width;
         }
 
         public void CompleteTranslation(double quota)
@@ -159,7 +159,7 @@ namespace XamSwipeListView
                     IsLeftContentVisible = false;
                     HasRightControl = true;
                     HasLeftControl = false;
-                    mainContent.TranslateTo(this.View.Width + 10, 0, SwipeDuration);
+                    mainContent.TranslateTo(this.Width + 10, 0, SwipeDuration);
                     if (ChangeOpacity == true) { mainContent.FadeTo(0, SwipeDuration); }
                     if (SwipeRightCompleted != null) { SwipeRightCompleted(this, this.BoundItem); }
                 }
@@ -169,7 +169,7 @@ namespace XamSwipeListView
                     IsLeftContentVisible = true;
                     HasRightControl = false;
                     HasLeftControl = true;
-                    mainContent.TranslateTo(-this.View.Width - 10, 0, SwipeDuration);
+                    mainContent.TranslateTo(-this.Width - 10, 0, SwipeDuration);
                     if (ChangeOpacity == true) { mainContent.FadeTo(0, SwipeDuration); }
                     if (SwipeLeftCompleted != null) { SwipeLeftCompleted(this, this.BoundItem); }
                 }
@@ -193,21 +193,21 @@ namespace XamSwipeListView
             IsLeftContentVisible = false;
         }
 
-        static XamSwipeItemView()
+        static SwipeItemView()
         {
-            MainContentProperty = BindableProperty.Create(nameof(MainContent), typeof(View), typeof(XamSwipeItemView), null, propertyChanged: MainContentChanged);
-            SwipeLeftContentProperty = BindableProperty.Create(nameof(SwipeLeftContent), typeof(View), typeof(XamSwipeItemView), null, propertyChanged: SwipeLeftContentChanged);
-            SwipeRightContentProperty = BindableProperty.Create(nameof(SwipeRightContent), typeof(View), typeof(XamSwipeItemView), null, propertyChanged: SwipeRightContentChanged);
-            BoundItemProperty = BindableProperty.Create(nameof(BoundItem), typeof(object), typeof(XamSwipeItemView), null, propertyChanged: BoundItemChanged);
+            MainContentProperty = BindableProperty.Create(nameof(MainContent), typeof(View), typeof(SwipeItemView), null, propertyChanged: MainContentChanged);
+            SwipeLeftContentProperty = BindableProperty.Create(nameof(SwipeLeftContent), typeof(View), typeof(SwipeItemView), null, propertyChanged: SwipeLeftContentChanged);
+            SwipeRightContentProperty = BindableProperty.Create(nameof(SwipeRightContent), typeof(View), typeof(SwipeItemView), null, propertyChanged: SwipeRightContentChanged);
+            BoundItemProperty = BindableProperty.Create(nameof(BoundItem), typeof(object), typeof(SwipeItemView), null, propertyChanged: BoundItemChanged);
         }
 
         private static void BoundItemChanged(BindableObject bindable, object oldValue, object newValue)
         {
             if (oldValue != newValue)
             {
-                (bindable as XamSwipeItemView).innerContent.BindingContext = newValue;
-                (bindable as XamSwipeItemView).innerLeftContent.BindingContext = newValue;
-                (bindable as XamSwipeItemView).innerRightContent.BindingContext = newValue;
+                (bindable as SwipeItemView).innerContent.BindingContext = newValue;
+                (bindable as SwipeItemView).innerLeftContent.BindingContext = newValue;
+                (bindable as SwipeItemView).innerRightContent.BindingContext = newValue;
                 bindable.SetValue(BoundItemProperty, newValue);
             }
         }
@@ -216,7 +216,7 @@ namespace XamSwipeListView
         {
             if (oldValue != newValue)
             {
-                (bindable as XamSwipeItemView).innerContent.Content = (View)newValue;
+                (bindable as SwipeItemView).innerContent.Content = (View)newValue;
                 bindable.SetValue(MainContentProperty, newValue);
             }
         }
@@ -224,7 +224,7 @@ namespace XamSwipeListView
         {
             if (oldValue != newValue)
             {
-                (bindable as XamSwipeItemView).innerLeftContent.Content = (View)newValue;
+                (bindable as SwipeItemView).innerLeftContent.Content = (View)newValue;
                 bindable.SetValue(SwipeLeftContentProperty, newValue);
             }
         }
@@ -232,7 +232,7 @@ namespace XamSwipeListView
         {
             if (oldValue != newValue)
             {
-                (bindable as XamSwipeItemView).innerRightContent.Content = (View)newValue;
+                (bindable as SwipeItemView).innerRightContent.Content = (View)newValue;
                 bindable.SetValue(SwipeRightContentProperty, newValue);
             }
         }
@@ -245,6 +245,7 @@ namespace XamSwipeListView
                 mainContent.BindingContext = this;
                 leftContent.BindingContext = this;
                 rightContent.BindingContext = this;
+                //ForceUpdateSize();
             }
         }
     }

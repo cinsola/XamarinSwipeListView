@@ -5,30 +5,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ExampleApp.MainPage"
-             xmlns:converter="clr-namespace:XamSwipeListView.Converter;assembly=XamSwipeListView"
-			 xmlns:xam="clr-namespace:XamSwipeListView;assembly=XamSwipeListView">
+             xmlns:converter="clr-namespace:SwipeCollectionView.Converter;assembly=SwipeCollectionView"
+			 xmlns:xam="clr-namespace:SwipeCollectionView;assembly=SwipeCollectionView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:NegateValueConverter x:Key="negateConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <xam:XamSwipeListView ItemsSource="{Binding ListItems}" SeparatorVisibility="Default" RowHeight="150" x:Name="swipeListView">
-            <xam:XamSwipeListView.ItemTemplate>
+        <xam:SwipeCollectionView ItemsSource="{Binding ListItems}" x:Name="swipeListView">
+            <xam:SwipeCollectionView.ItemTemplate>
                 <DataTemplate>
-                    <xam:XamSwipeItemView  x:Name="loopedElement"
+                    <xam:SwipeItemView  x:Name="loopedElement"
                                            BoundItem="{Binding}"
                                            ChangeOpacity="True"
                                            SwipeRightCompleted="SwipeRightCompleted">
-                        <xam:XamSwipeItemView.MainContent>
+                        <xam:SwipeItemView.MainContent>
                             <StackLayout Padding="15">
                                 <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
                                 <Label Text="{Binding Description}" Margin="0, 0, 0, 0" FontSize="Default" />
                                 <Label Text="{Binding Join, StringFormat='Joined the team: {0:d}'}" />
-                                <Button Text="Open" HorizontalOptions="Start" />
                             </StackLayout>
-                        </xam:XamSwipeItemView.MainContent>
-                        <xam:XamSwipeItemView.SwipeRightContent>
+                        </xam:SwipeItemView.MainContent>
+                        <xam:SwipeItemView.SwipeRightContent>
                             <StackLayout BackgroundColor="Green" Padding="15" Orientation="Horizontal">
                                 <Label Text="Save this item for later" TextColor="White" Margin="0, 0, 15, 0"
 											   VerticalOptions="Center" IsVisible="{Binding SavedConfirmed, Converter={StaticResource negateConverter}}" />
@@ -38,8 +37,8 @@
 												CommandParameter="{Reference Name=loopedElement}"
 												VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding LeftVisible}" />
                             </StackLayout>
-                        </xam:XamSwipeItemView.SwipeRightContent>
-                        <xam:XamSwipeItemView.SwipeLeftContent>
+                        </xam:SwipeItemView.SwipeRightContent>
+                        <xam:SwipeItemView.SwipeLeftContent>
                             <ContentView BackgroundColor="Red" Padding="15">
                                 <Button 
 											Text="{Binding Name, StringFormat='Remove {0}'}" 
@@ -47,10 +46,10 @@
 											Clicked="RemoveElement" 
 											CommandParameter="{Binding .}" />
                             </ContentView>
-                        </xam:XamSwipeItemView.SwipeLeftContent>
-                    </xam:XamSwipeItemView>
+                        </xam:SwipeItemView.SwipeLeftContent>
+                    </xam:SwipeItemView>
                 </DataTemplate>
-            </xam:XamSwipeListView.ItemTemplate>
-        </xam:XamSwipeListView>
+            </xam:SwipeCollectionView.ItemTemplate>
+        </xam:SwipeCollectionView>
     </StackLayout>
 </ContentPage>

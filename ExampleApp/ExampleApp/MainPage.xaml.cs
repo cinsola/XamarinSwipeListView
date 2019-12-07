@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Xamarin.Forms;
-using XamSwipeListView;
+using SwipeCollectionView;
 
 namespace ExampleApp
 {
@@ -32,13 +32,13 @@ namespace ExampleApp
         {
             var selectedItem = (ItemClass)e;
             selectedItem.SavedConfirmed = true;
-            TouchDispatcher.TouchingView = null;
-            TouchDispatcher.TouchingView = null;
+            TouchDispatcherHelper.TouchingView = null;
+            TouchDispatcherHelper.TouchingView = null;
         }
 
         private void UndoClick(object sender, EventArgs e)
         {
-            var itemView = (sender as Button).CommandParameter as XamSwipeItemView;
+            var itemView = (sender as Button).CommandParameter as SwipeItemView;
             (itemView.BoundItem as ItemClass).SavedConfirmed = false;
             itemView.PristineItem();
         }
@@ -50,14 +50,14 @@ namespace ExampleApp
         public ProjectViewModel()
         {
             ListItems = new ObservableCollection<ItemClass> {
-                new ItemClass("1Angela", "The .NET fullstack Developer", new DateTime(2016, 6, 2)),
-                new ItemClass("2Bacco", "A front-end developer", new DateTime(2016, 7, 14)),
-                //new ItemClass("3Ciro", "Works with games", new DateTime(2016, 8, 1)),
-                //new ItemClass("4Dario", "The fucking CFO", new DateTime(2016, 10, 25)),
-                //new ItemClass("5Elmno", "Does nothing at all", new DateTime(2017, 1, 9)),
-                //new ItemClass("6Francis", "The good girl", new DateTime(2017, 1, 9)),
-                //new ItemClass("7Gus", "The CO-Founder", new DateTime(2016, 6, 2)),
-                new ItemClass("8Hope", "Our business-woman", new DateTime(2016, 10, 15))
+                new ItemClass("Angela", "The .NET fullstack Developer", new DateTime(2016, 6, 2)),
+                new ItemClass("Bacco", "A front-end developer", new DateTime(2016, 7, 14)),
+                new ItemClass("Ciro", "Works with games", new DateTime(2016, 8, 1)),
+                new ItemClass("Dario", "The fucking CFO", new DateTime(2016, 10, 25)),
+                new ItemClass("Elmno", "Does nothing at all", new DateTime(2017, 1, 9)),
+                new ItemClass("Francis", "The good girl", new DateTime(2017, 1, 9)),
+                new ItemClass("Gus", "The CO-Founder", new DateTime(2016, 6, 2)),
+                new ItemClass("Hope", "Our business-woman", new DateTime(2016, 10, 15))
             };
         }
     }

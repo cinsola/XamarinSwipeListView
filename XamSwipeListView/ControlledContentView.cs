@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
-namespace XamSwipeListView
+namespace SwipeCollectionView
 {
     public class ControlledContentView : Frame
     {

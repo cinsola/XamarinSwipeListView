@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamSwipeListView.XamSwipeItemView"
-             xmlns:current="clr-namespace:XamSwipeListView">
-    <ViewCell.View>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="SwipeCollectionView.SwipeItemView"
+             xmlns:current="clr-namespace:SwipeCollectionView">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -23,5 +22,4 @@
                 <ContentView x:Name="innerContent" />
             </ContentView>
         </Grid>
-    </ViewCell.View>
-</ViewCell>
+</StackLayout>

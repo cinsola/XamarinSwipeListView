@@ -2,12 +2,11 @@ using Android.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using XamSwipeListView;
 
-[assembly: ExportRenderer(typeof(XamSwipeListView.XamSwipeListView), typeof(XamSwipeList.Droid.CustomRenderer.SwipeListRenderer))]
-namespace XamSwipeList.Droid.CustomRenderer
+[assembly: ExportRenderer(typeof(SwipeCollectionView.SwipeCollectionView), typeof(SwipeCollectionView.Android.CustomRenderer.SwipeCollectionViewRenderer))]
+namespace SwipeCollectionView.Android.CustomRenderer
 {
-    public class SwipeListRenderer : ListViewRenderer
+    public class SwipeCollectionViewRenderer : CollectionViewRenderer
 	{
         public enum Status
         {
@@ -23,30 +22,30 @@ namespace XamSwipeList.Droid.CustomRenderer
         private double _lastY = 0;
         private double _lastDistance = 0;
 
-        private Status CurrentStatus = SwipeListRenderer.Status.Default;
-        public SwipeListRenderer() : base(Android.App.Application.Context)
+        private Status CurrentStatus = Status.Default;
+        public SwipeCollectionViewRenderer() : base(global::Android.App.Application.Context)
         {
 
         }
 
         public override bool DispatchTouchEvent(MotionEvent touch)
 		{
-			if (TouchDispatcher.TouchingView != null)
+			if (TouchDispatcherHelper.TouchingView != null)
 			{
-				double currentQuota = ((touch.GetX() - TouchDispatcher.StartingBiasX) / (double)this.Width);
-                double currentScrollQuota = ((touch.GetY() - TouchDispatcher.StartingBiasY) / (double)this.Height);
+				double currentQuota = ((touch.GetX() - TouchDispatcherHelper.StartingBiasX) / (double)this.Width);
+                double currentScrollQuota = ((touch.GetY() - TouchDispatcherHelper.StartingBiasY) / (double)this.Height);
                 bool isgoingBack = _lastDistance - Math.Abs(currentQuota) > 0;
                 _setScrolling(currentQuota, currentScrollQuota);
 
-                var touchedElement = (TouchDispatcher.TouchingView as XamSwipeItemView);
+                var touchedElement = (TouchDispatcherHelper.TouchingView as SwipeItemView);
 				switch (touch.ActionMasked)
 				{
 					case MotionEventActions.Up:
                         CurrentStatus = Status.Default;
                         touchedElement.CompleteTranslation(currentQuota);
-						TouchDispatcher.TouchingView = null;
-						TouchDispatcher.StartingBiasX = 0;
-						TouchDispatcher.StartingBiasY = 0;
+						TouchDispatcherHelper.TouchingView = null;
+						TouchDispatcherHelper.StartingBiasX = 0;
+						TouchDispatcherHelper.StartingBiasY = 0;
 						break;
 					case MotionEventActions.Move:
                         if(Math.Abs(currentQuota) > SwipingMinimalStart)
@@ -63,7 +62,7 @@ namespace XamSwipeList.Droid.CustomRenderer
                             isgoingBack
                             ))
 						{
-							TouchDispatcher.TouchingView.PerformTranslation(currentQuota);
+							TouchDispatcherHelper.TouchingView.PerformTranslation(currentQuota);
 						}
 						break;
 				}

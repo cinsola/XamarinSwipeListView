@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace XamSwipeListView
+namespace SwipeCollectionView
 {
-    public static class TouchDispatcher
+    public static class TouchDispatcherHelper
     {
-        public static XamSwipeItemView TouchingView { get; set; }
+        public static SwipeItemView TouchingView { get; set; }
         public static float StartingBiasX { get; set; }
         public static float StartingBiasY { get; set; }
         public static DateTime InitialTouch { get; set; }
-        static TouchDispatcher()
+        static TouchDispatcherHelper()
         {
             TouchingView = null;
             StartingBiasX = 0;
