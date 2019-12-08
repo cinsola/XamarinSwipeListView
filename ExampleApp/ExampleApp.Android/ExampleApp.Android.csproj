@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
@@ -89,12 +89,8 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SwipeCollectionView.Android\SwipeCollectionView.Android.csproj">
-      <Project>{936de348-b174-4f56-9bc9-97b45ba599e2}</Project>
-      <Name>SwipeCollectionView.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\SwipeCollectionView\SwipeCollectionView.csproj">
-      <Project>{08185BDA-2DC7-4D65-81CA-A94180A8EE4A}</Project>
+      <Project>{08185bda-2dc7-4d65-81ca-a94180a8ee4a}</Project>
       <Name>SwipeCollectionView</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExampleApp\ExampleApp.csproj">

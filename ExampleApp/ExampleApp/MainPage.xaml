@@ -5,28 +5,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ExampleApp.MainPage"
-             xmlns:shared="clr-namespace:SwipeCollectionView.Platform.Shared;assembly=SwipeCollectionView">
+             xmlns:swipeview="clr-namespace:SwipeCollectionView.Platform.Shared;assembly=SwipeCollectionView">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <shared:NegateValueConverter x:Key="negateConverter" />
+            <swipeview:NegateValueConverter x:Key="negateConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <shared:SwipeCollectionView ItemsSource="{Binding ListItems}" x:Name="swipeListView">
-            <shared:SwipeCollectionView.ItemTemplate>
+        <swipeview:SwipeCollectionView ItemsSource="{Binding ListItems}" x:Name="swipeListView">
+            <swipeview:SwipeCollectionView.ItemTemplate>
                 <DataTemplate>
-                    <shared:SwipeItemView x:Name="loopedElement"
+                    <swipeview:SwipeItemView x:Name="loopedElement"
                                            BoundItem="{Binding}"
                                            ChangeOpacity="True"
                                            SwipeRightCompleted="SwipeRightCompleted">
-                        <shared:SwipeItemView.MainContent>
+                        <swipeview:SwipeItemView.MainContent>
                             <StackLayout Padding="15">
                                 <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" />
                                 <Label Text="{Binding Description}" Margin="0, 0, 0, 0" FontSize="Default" />
                                 <Label Text="{Binding Join, StringFormat='Joined the team: {0:d}'}" />
                             </StackLayout>
-                        </shared:SwipeItemView.MainContent>
-                        <shared:SwipeItemView.SwipeRightContent>
+                        </swipeview:SwipeItemView.MainContent>
+                        <swipeview:SwipeItemView.SwipeRightContent>
                             <StackLayout BackgroundColor="Green" Padding="15" Orientation="Horizontal">
                                 <Label Text="Save this item for later" TextColor="White" Margin="0, 0, 15, 0"
 											   VerticalOptions="Center" IsVisible="{Binding SavedConfirmed, Converter={StaticResource negateConverter}}" />
@@ -36,8 +36,8 @@
 												CommandParameter="{Reference Name=loopedElement}"
 												VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding LeftVisible}" />
                             </StackLayout>
-                        </shared:SwipeItemView.SwipeRightContent>
-                        <shared:SwipeItemView.SwipeLeftContent>
+                        </swipeview:SwipeItemView.SwipeRightContent>
+                        <swipeview:SwipeItemView.SwipeLeftContent>
                             <ContentView BackgroundColor="Red" Padding="15">
                                 <Button 
 											Text="{Binding Name, StringFormat='Remove {0}'}" 
@@ -45,10 +45,10 @@
 											Clicked="RemoveElement" 
 											CommandParameter="{Binding .}" />
                             </ContentView>
-                        </shared:SwipeItemView.SwipeLeftContent>
-                    </shared:SwipeItemView>
+                        </swipeview:SwipeItemView.SwipeLeftContent>
+                    </swipeview:SwipeItemView>
                 </DataTemplate>
-            </shared:SwipeCollectionView.ItemTemplate>
-        </shared:SwipeCollectionView>
+            </swipeview:SwipeCollectionView.ItemTemplate>
+        </swipeview:SwipeCollectionView>
     </StackLayout>
 </ContentPage>

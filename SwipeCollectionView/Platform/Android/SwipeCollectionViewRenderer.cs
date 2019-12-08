@@ -1,14 +1,14 @@
-using Android.Views;
+﻿using Android.Views;
 using SwipeCollectionView.Platform.Shared;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(SwipeCollectionView.Platform.Shared.SwipeCollectionView), typeof(SwipeCollectionView.Android.CustomRenderer.SwipeCollectionViewRenderer))]
-namespace SwipeCollectionView.Android.CustomRenderer
+[assembly: ExportRenderer(typeof(SwipeCollectionView.Platform.Shared.SwipeCollectionView), typeof(SwipeCollectionView.Platform.Android.SwipeCollectionViewRenderer))]
+namespace SwipeCollectionView.Platform.Android
 {
     public class SwipeCollectionViewRenderer : CollectionViewRenderer
-	{
+    {
         public enum Status
         {
             StartedSwiping,
@@ -30,26 +30,26 @@ namespace SwipeCollectionView.Android.CustomRenderer
         }
 
         public override bool DispatchTouchEvent(MotionEvent touch)
-		{
-			if (TouchDispatcherHelper.TouchingView != null)
-			{
-				double currentQuota = ((touch.GetX() - TouchDispatcherHelper.StartingBiasX) / (double)this.Width);
+        {
+            if (TouchDispatcherHelper.TouchingView != null)
+            {
+                double currentQuota = ((touch.GetX() - TouchDispatcherHelper.StartingBiasX) / (double)this.Width);
                 double currentScrollQuota = ((touch.GetY() - TouchDispatcherHelper.StartingBiasY) / (double)this.Height);
                 bool isgoingBack = _lastDistance - Math.Abs(currentQuota) > 0;
                 _setScrolling(currentQuota, currentScrollQuota);
 
                 var touchedElement = TouchDispatcherHelper.TouchingView;
-				switch (touch.ActionMasked)
-				{
-					case MotionEventActions.Up:
+                switch (touch.ActionMasked)
+                {
+                    case MotionEventActions.Up:
                         CurrentStatus = Status.Default;
                         touchedElement.CompleteTranslation(currentQuota);
-						TouchDispatcherHelper.TouchingView = null;
-						TouchDispatcherHelper.StartingBiasX = 0;
-						TouchDispatcherHelper.StartingBiasY = 0;
-						break;
-					case MotionEventActions.Move:
-                        if(Math.Abs(currentQuota) > SwipingMinimalStart)
+                        TouchDispatcherHelper.TouchingView = null;
+                        TouchDispatcherHelper.StartingBiasX = 0;
+                        TouchDispatcherHelper.StartingBiasY = 0;
+                        break;
+                    case MotionEventActions.Move:
+                        if (Math.Abs(currentQuota) > SwipingMinimalStart)
                         {
                             CurrentStatus = Status.Swiping;
                         }
@@ -58,18 +58,18 @@ namespace SwipeCollectionView.Android.CustomRenderer
                             CurrentStatus = Status.StartedSwiping;
                         }
 
-						if (touchedElement.SwipeCompleted == false && 
+                        if (touchedElement.SwipeCompleted == false &&
                             (CurrentStatus != Status.StartedSwiping ||
                             isgoingBack
                             ))
-						{
-							TouchDispatcherHelper.TouchingView.PerformTranslation(currentQuota);
-						}
-						break;
-				}
+                        {
+                            TouchDispatcherHelper.TouchingView.PerformTranslation(currentQuota);
+                        }
+                        break;
+                }
             }
             return CurrentStatus == Status.Swiping ? true : base.DispatchTouchEvent(touch);
-		}
+        }
 
         private void _setScrolling(double currentQuota, double currentScrollQuota)
         {

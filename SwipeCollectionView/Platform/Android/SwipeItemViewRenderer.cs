@@ -1,13 +1,14 @@
-using Android.Views;
+﻿using Android.Views;
 using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: Xamarin.Forms.ExportRenderer(typeof(SwipeCollectionView.Platform.Shared.SwipeItemView), typeof(SwipeCollectionView.Android.CustomRenderer.SwipeItemRenderer))]
-namespace SwipeCollectionView.Android.CustomRenderer
+[assembly: ExportRenderer(typeof(SwipeCollectionView.Platform.Shared.SwipeItemView), typeof(SwipeCollectionView.Platform.Android.SwipeItemViewRenderer))]
+namespace SwipeCollectionView.Platform.Android
 {
-    public class SwipeItemRenderer : ViewRenderer
+    public class SwipeItemViewRenderer : ViewRenderer
     {
-        public SwipeItemRenderer() : base(global::Android.App.Application.Context)
+        public SwipeItemViewRenderer() : base(global::Android.App.Application.Context)
         {
 
         }
@@ -23,7 +24,7 @@ namespace SwipeCollectionView.Android.CustomRenderer
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.View> e)
         {
             base.OnElementChanged(e);
-            if(e.NewElement != null)
+            if (e.NewElement != null)
             {
                 CellItem = e.NewElement as Platform.Shared.SwipeItemView;
             }
