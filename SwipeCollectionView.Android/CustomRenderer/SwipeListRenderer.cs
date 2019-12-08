@@ -1,9 +1,10 @@
 using Android.Views;
+using SwipeCollectionView.Platform.Shared;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(SwipeCollectionView.SwipeCollectionView), typeof(SwipeCollectionView.Android.CustomRenderer.SwipeCollectionViewRenderer))]
+[assembly: ExportRenderer(typeof(SwipeCollectionView.Platform.Shared.SwipeCollectionView), typeof(SwipeCollectionView.Android.CustomRenderer.SwipeCollectionViewRenderer))]
 namespace SwipeCollectionView.Android.CustomRenderer
 {
     public class SwipeCollectionViewRenderer : CollectionViewRenderer
@@ -37,7 +38,7 @@ namespace SwipeCollectionView.Android.CustomRenderer
                 bool isgoingBack = _lastDistance - Math.Abs(currentQuota) > 0;
                 _setScrolling(currentQuota, currentScrollQuota);
 
-                var touchedElement = (TouchDispatcherHelper.TouchingView as SwipeItemView);
+                var touchedElement = TouchDispatcherHelper.TouchingView;
 				switch (touch.ActionMasked)
 				{
 					case MotionEventActions.Up:

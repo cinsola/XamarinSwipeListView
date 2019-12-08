@@ -3,7 +3,7 @@ using Android.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(SwipeCollectionView.ControlledContentView), typeof(SwipeCollectionView.Android.CustomRenderer.ControlledContentRenderer))]
+[assembly: ExportRenderer(typeof(SwipeCollectionView.Platform.Shared.ControlledContentView), typeof(SwipeCollectionView.Android.CustomRenderer.ControlledContentRenderer))]
 namespace SwipeCollectionView.Android.CustomRenderer
 {
     public class ControlledContentRenderer: FrameRenderer
@@ -17,7 +17,7 @@ namespace SwipeCollectionView.Android.CustomRenderer
         {
             if(e.PropertyName == "HasControl")
             {
-                EventsToggler((this.Element as global::SwipeCollectionView.ControlledContentView).HasControl, this);
+                EventsToggler((this.Element as Platform.Shared.ControlledContentView).HasControl, this);
             }
         }
 

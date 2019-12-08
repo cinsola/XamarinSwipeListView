@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace SwipeCollectionView
+namespace SwipeCollectionView.Platform.Shared
 {
     public class SwipeCollectionView : CollectionView
     {

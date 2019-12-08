@@ -1,14 +1,57 @@
 ﻿using System;
-using System.ComponentModel;
-
+using System.Collections.Generic;
+using System.Text;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace SwipeCollectionView
+namespace SwipeCollectionView.Platform.Shared
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SwipeItemView : StackLayout, INotifyPropertyChanged
+    public class SwipeItemView : ContentView
     {
+        ContentView innerRightContent;
+        ContentView innerLeftContent;
+        ContentView mainContent;
+        ContentView innerContent;
+        ControlledContentView rightContent;
+        ControlledContentView leftContent;
+
+        public SwipeItemView()
+        {
+            innerLeftContent = new ContentView();
+            innerRightContent = new ContentView();
+            mainContent = new ContentView();
+            innerContent = new ContentView();
+            Grid mainGrid = new Grid();
+            mainGrid.RowDefinitions = new RowDefinitionCollection();
+            mainGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+            mainGrid.ColumnDefinitions = new ColumnDefinitionCollection();
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+
+            rightContent = new ControlledContentView();
+            rightContent.SetValue(Grid.ColumnProperty, 0);
+            rightContent.SetValue(Grid.RowProperty, 0);
+            rightContent.SetBinding(ControlledContentView.IsVisibleProperty, new Binding("IsRightContentVisible"));
+            rightContent.SetBinding(ControlledContentView.HasControlProperty, new Binding("HasRightControl"));
+
+            leftContent = new ControlledContentView();
+            leftContent.SetValue(Grid.ColumnProperty, 0);
+            leftContent.SetValue(Grid.RowProperty, 0);
+            leftContent.SetBinding(ControlledContentView.IsVisibleProperty, new Binding("IsLeftContentVisible"));
+            leftContent.SetBinding(ControlledContentView.HasControlProperty, new Binding("HasLeftControl"));
+
+            rightContent.Content = innerRightContent;
+            leftContent.Content = innerLeftContent;
+
+            mainContent.Content = innerContent;
+            mainContent.SetValue(Grid.ColumnProperty, 0);
+            mainContent.SetValue(Grid.RowProperty, 0);
+            mainContent.BackgroundColor = Color.White;
+
+            mainGrid.Children.Add(rightContent);
+            mainGrid.Children.Add(leftContent);
+            mainGrid.Children.Add(mainContent);
+            Content = mainGrid;
+        }
+
         public event EventHandler<object> SwipeLeftCompleted;
         public event EventHandler<object> SwipeRightCompleted;
         public event EventHandler<object> DismissSwipe;
@@ -34,7 +77,7 @@ namespace SwipeCollectionView
                 if (value != _isRightContentVisible)
                 {
                     _isRightContentVisible = value;
-                    OnPropertyChanged(nameof(IsRightContentVisible)); 
+                    OnPropertyChanged(nameof(IsRightContentVisible));
                 }
             }
         }
@@ -46,7 +89,7 @@ namespace SwipeCollectionView
                 if (value != _isLeftContentVisible)
                 {
                     _isLeftContentVisible = value;
-                    OnPropertyChanged(nameof(IsLeftContentVisible)); 
+                    OnPropertyChanged(nameof(IsLeftContentVisible));
                 }
             }
         }
@@ -60,7 +103,7 @@ namespace SwipeCollectionView
                 if (value != _hasRightControl)
                 {
                     _hasRightControl = value;
-                    OnPropertyChanged(nameof(HasRightControl)); 
+                    OnPropertyChanged(nameof(HasRightControl));
                 }
             }
         }
@@ -73,7 +116,7 @@ namespace SwipeCollectionView
                 if (value != _hasLeftControl)
                 {
                     _hasLeftControl = value;
-                    OnPropertyChanged(nameof(HasLeftControl)); 
+                    OnPropertyChanged(nameof(HasLeftControl));
                 }
             }
         }
@@ -115,17 +158,13 @@ namespace SwipeCollectionView
                 SetValue(BoundItemProperty, value);
             }
         }
-        public SwipeItemView()
-        {
-            InitializeComponent();
-        }
 
         public void PerformTranslation(double quota)
         {
             HasLeftControl = false;
             HasRightControl = false;
 
-            if(quota == 0)
+            if (quota == 0)
             {
                 IsRightContentVisible = false;
                 IsLeftContentVisible = false;
@@ -138,7 +177,7 @@ namespace SwipeCollectionView
                 if (ChangeOpacity == true) { mainContent.Opacity = 1 - Math.Abs(quota); }
             }
 
-            if(quota < 0)
+            if (quota < 0)
             {
                 IsRightContentVisible = false;
                 IsLeftContentVisible = true;
@@ -245,7 +284,6 @@ namespace SwipeCollectionView
                 mainContent.BindingContext = this;
                 leftContent.BindingContext = this;
                 rightContent.BindingContext = this;
-                //ForceUpdateSize();
             }
         }
     }

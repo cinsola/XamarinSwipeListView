@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace SwipeCollectionView
+namespace SwipeCollectionView.Platform.Shared
 {
     public class ControlledContentView : Frame
     {

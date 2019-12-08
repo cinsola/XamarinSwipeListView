@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace SwipeCollectionView.Converter
+namespace SwipeCollectionView.Platform.Shared
 {
     public class NegateValueConverter : IValueConverter
     {

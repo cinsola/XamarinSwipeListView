@@ -6,19 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Item Include="Platform\Shared\**\*.cs" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="SwipeItemView.xaml.cs">
-      <DependentUpon>SwipeItemView.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="SwipeItemView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

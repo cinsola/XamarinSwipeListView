@@ -32,13 +32,13 @@ namespace ExampleApp
         {
             var selectedItem = (ItemClass)e;
             selectedItem.SavedConfirmed = true;
-            TouchDispatcherHelper.TouchingView = null;
-            TouchDispatcherHelper.TouchingView = null;
+            SwipeCollectionView.Platform.Shared.TouchDispatcherHelper.TouchingView = null;
+            SwipeCollectionView.Platform.Shared.TouchDispatcherHelper.TouchingView = null;
         }
 
         private void UndoClick(object sender, EventArgs e)
         {
-            var itemView = (sender as Button).CommandParameter as SwipeItemView;
+            var itemView = (sender as Button).CommandParameter as SwipeCollectionView.Platform.Shared.SwipeItemView;
             (itemView.BoundItem as ItemClass).SavedConfirmed = false;
             itemView.PristineItem();
         }
