@@ -7,7 +7,10 @@ This is a result you can obtain:
 
 
 ## Basic Setup
-1. Clone the repo
+1. Download the nuget package:
+```
+Install-Package SwipeCollectionView
+```
 2. In you Android project, enable the collection view flag:
 ```csharp
 protected override void OnCreate(Bundle savedInstanceState)
